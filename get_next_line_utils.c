@@ -6,11 +6,27 @@
 /*   By: mbentale <mbentale@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/17 15:17:36 by mbentale          #+#    #+#             */
-/*   Updated: 2024/11/19 10:15:41 by mbentale         ###   ########.fr       */
+/*   Updated: 2024/11/20 09:45:21 by mbentale         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	while (s[i])
+	{
+		if (s[i] == (char)c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	if (s[i] == (char)c)
+		return ((char *)&s[i]);
+	return (NULL);
+}
 
 size_t	ft_strlen(const char *s)
 {
@@ -62,4 +78,31 @@ char	*ft_substr(char const *s, unsigned int start, size_t len)
 	}
 	substr[i] = '\0';
 	return (substr);
+}
+
+char	*ft_strjoin(const char *s1, const char *s2)
+{
+	int		len_s1;
+	int		len_s2;
+	char	*res;
+	int		i;
+
+	if (s1 == 0 && s2 == 0)
+		return (NULL);
+	if (s1 == 0)
+		return (ft_strdup(s2));
+	if (s2 == 0)
+		return (ft_strdup(s1));
+	len_s1 = ft_strlen(s1);
+	len_s2 = ft_strlen(s2);
+	res = (char *)malloc(len_s1 + len_s2 + 1);
+	if (res == NULL)
+		return (NULL);
+	i = 0;
+	while (*s1)
+        res[i++] = *s1++;
+    while (*s2)
+        res[i++] = *s2++;
+    res[i] = '\0';
+	return (res);
 }
